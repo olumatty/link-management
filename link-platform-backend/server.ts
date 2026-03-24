@@ -1,7 +1,7 @@
-const express = require("express");
-const cors = require("cors");
-const mongoose = require("mongoose");
-const dotenv = require("mongoose");
+import express, { Request, Response } from "express";
+import cors from "cors";
+import mongoose from "mongoose";
+import dotenv from "dotenv";
 
 dotenv.config();
 
@@ -12,11 +12,11 @@ app.use(express.json());
 app.use(cors({}));
 
 mongoose
-  .connect(process.env.MONGO_URI)
+  .connect(process.env.MONGO_URI as string)
   .then(() => console.log("MongoDB connected"))
-  .catch((err) => console.error("MongoDB connection error:", err));
+  .catch((err: Error) => console.error("MongoDB connection error:", err));
 
-app.get("/", (req, res) => {
+app.get("/", (req: Request, res: Response) => {
   res.send("API IS RUNNING.....");
 });
 
